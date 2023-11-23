@@ -1,0 +1,13 @@
+name: mbtiles
+description: Mapbox MBTiles files using Drift for SqLite
+version: 0.1.0
+repository: https://github.com/josxha/dart_mbtiles
+issue_tracker: https://github.com/josxha/dart_mbtiles/issues
+
+environment:
+  sdk: ^3.2.0
+
+dependencies:
+
+dev_dependencies:
+  lints: ^2.1.0
