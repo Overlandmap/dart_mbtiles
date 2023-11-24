@@ -1,3 +1,2 @@
-library dart_mbtiles;
-
 export 'src/mbtiles.dart';
+export 'src/models/mbtiles_metadata.dart';

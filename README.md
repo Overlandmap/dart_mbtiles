@@ -21,3 +21,6 @@ const like = 'sample';
 ## Additional information
 
 - [MBTiles specification](https://github.com/mapbox/mbtiles-spec)
+
+## To do
+- [ ] Create shared index for tiles table https://stackoverflow.com/questions/76544716/drift-syntax-to-create-an-index
