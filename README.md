@@ -1,10 +1,10 @@
 # mbtiles
 
-A dart package that gives support for MBTiles files. 
+Mapbox MBTiles v1.3 files, support for vector and raster tiles.
 
 - Supported raster tiles: `jpg`, `png`, `webp` 
 - Supported vector tiles: `pbf`
-- Web is not supported because of it's lack of sqlite support
+- Web is currently not supported because of its lacking support of sqlite.
 
 ![Pub Likes](https://img.shields.io/pub/likes/mbtiles)
 ![Pub Points](https://img.shields.io/pub/points/mbtiles)

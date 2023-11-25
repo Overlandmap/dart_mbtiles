@@ -1,6 +1,6 @@
 name: mbtiles
-description: Support for Mapbox MBTiles v1.3 files
-version: 0.1.0
+description: Mapbox MBTiles v1.3 files, support for vector and raster tiles.
+version: 0.1.0+1
 repository: https://github.com/josxha/dart_mbtiles
 issue_tracker: https://github.com/josxha/dart_mbtiles/issues
 topics: [ mbtiles, map ]
