@@ -10,24 +10,45 @@ void main() {
       ? r'assets\windows\sqlite3.dll'
       : 'assets/${Platform.operatingSystem}/sqlite3';
 
+  print('RASTER MBTILES');
+
   // open mbtiles
   final sep = Platform.pathSeparator;
-  final mbtiles = MBTiles(
+  final rasterMbtiles = MBTiles(
     mbtilesPath: 'assets${sep}mbtiles${sep}countries-raster.mbtiles',
     sqlitePath: sqlitePath,
   );
 
   // get metadata
-  final metadata = mbtiles.getMetadata();
+  final metadata = rasterMbtiles.getMetadata();
   print(metadata);
 
   // get tile data
-  final tile = mbtiles.getTile(0, 0, 0);
-  final tileSize = tile?.length ?? 0;
-  print('Tile size: ${formatSize(tileSize)}');
+  final rasterTile = rasterMbtiles.getTile(0, 0, 0);
+  final rasterTileSize = rasterTile?.length ?? 0;
+  print('Tile size: ${formatSize(rasterTileSize)}\n');
 
   // close mbtiles
-  mbtiles.dispose();
+  rasterMbtiles.dispose();
+
+  print('VECTOR MBTILES');
+
+  // open mbtiles
+  final vectorMbtiles = MBTiles(
+    mbtilesPath: 'assets${sep}mbtiles${sep}countries-vector.mbtiles',
+    sqlitePath: sqlitePath,
+  );
+
+  // get metadata
+  print(vectorMbtiles.getMetadata());
+
+  // get tile data
+  final vectorTile = vectorMbtiles.getTile(0, 0, 0);
+  final vectorTileSize = vectorTile?.length ?? 0;
+  print('Uncompressed tile size: ${formatSize(vectorTileSize)}');
+
+  // close mbtiles
+  vectorMbtiles.dispose();
 }
 
 /// Return a formatted String for an amount of bytes

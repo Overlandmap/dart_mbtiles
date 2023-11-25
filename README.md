@@ -1,6 +1,10 @@
 # mbtiles
 
-A dart package that gives support for MBTiles files.
+A dart package that gives support for MBTiles files. 
+
+- Supported raster tiles: `jpg`, `png`, `webp` 
+- Supported vector tiles: `pbf`
+- Web is not supported because of it's lack of sqlite support
 
 ![Pub Likes](https://img.shields.io/pub/likes/mbtiles)
 ![Pub Points](https://img.shields.io/pub/points/mbtiles)

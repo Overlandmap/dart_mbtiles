@@ -1,10 +1,10 @@
 import 'package:mbtiles/mbtiles.dart';
 import 'package:sqlite3/sqlite3.dart';
 
-class MetadataService {
+class MetadataRepository {
   final Database _database;
 
-  const MetadataService(this._database);
+  const MetadataRepository(this._database);
 
   MBTilesMetadata getAll() {
     final rows = _database.select('SELECT * FROM metadata');
