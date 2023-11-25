@@ -48,6 +48,9 @@ final tile = mbtiles.getTile(0, 0, 0);
 mbtiles.dispose();
 ```
 
+See the [example program](https://pub.dev/packages/mbtiles/example) for more information.
+
 ## Additional information
 
 - [MBTiles specification](https://github.com/mapbox/mbtiles-spec)
+- [Read about MBTiles in the OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/MBTiles)
