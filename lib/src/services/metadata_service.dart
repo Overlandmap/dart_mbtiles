@@ -38,7 +38,7 @@ class MetadataService {
     (double, double)? center;
     double? zoom;
     if (map.containsKey('center')) {
-      final values = map['bounds']!.split(',');
+      final values = map['center']!.split(',');
       center = (double.parse(values[0]), double.parse(values[1]));
       zoom = double.parse(values[2]);
     }

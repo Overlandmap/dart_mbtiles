@@ -9,7 +9,14 @@ class TileService {
   const TileService(this._database);
 
   Uint8List? getTile(int zoom, int column, int row) {
-    final rows = _database.select('SELECT tile_data FROM tiles LIMIT 1');
+    final rows = _database.select(
+      '''
+    SELECT tile_data FROM tiles 
+    WHERE zoom_level = ? AND tile_column = ? AND tile_row = ?
+    LIMIT 1
+    ''',
+      [zoom, column, row],
+    );
     if (rows.isEmpty) return null;
     return rows.first['tile_data'] as Uint8List;
   }
