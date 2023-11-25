@@ -5,6 +5,13 @@ repository: https://github.com/josxha/dart_mbtiles
 issue_tracker: https://github.com/josxha/dart_mbtiles/issues
 topics: [ mbtiles, map ]
 
+platforms:
+  android:
+  ios:
+  linux:
+  macos:
+  windows:
+
 environment:
   sdk: ^3.2.0
 
