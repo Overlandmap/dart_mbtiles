@@ -18,7 +18,6 @@ class MBTiles {
   /// Open a MBTiles file. Use the [sqlitePath] parameter if you don't use the
   /// `sqlite3_flutter_libs` package.
   MBTiles({required String mbtilesPath, String? sqlitePath}) {
-    // sqlite database
     if (sqlitePath != null) {
       open.overrideForAll(() => DynamicLibrary.open(sqlitePath));
     }

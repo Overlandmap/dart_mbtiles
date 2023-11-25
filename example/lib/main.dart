@@ -24,7 +24,7 @@ void main() {
   // get tile data
   final tile = mbtiles.getTile(0, 0, 0);
   final tileSize = tile?.length ?? 0;
-  print('Tile size: ${formatFileSize(tileSize)}');
+  print('Tile size: ${formatSize(tileSize)}');
 
   // close mbtiles
   mbtiles.dispose();
@@ -32,7 +32,7 @@ void main() {
 
 /// Return a formatted String for an amount of bytes
 /// (from https://stackoverflow.com/a/74568711/9439899)
-String formatFileSize(int amountBytes, {int decimals = 0}) {
+String formatSize(int amountBytes, {int decimals = 0}) {
   const suffixes = ["b", "kb", "mb", "gb", "tb"];
   if (amountBytes == 0) return '0${suffixes[0]}';
   final i = (log(amountBytes) / log(1024)).floor();

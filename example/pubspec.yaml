@@ -1,5 +1,5 @@
 name: mbtiles_example
-description: Mapbox MBTiles files using Drift for SqLite
+description: Example app for the mbtiles package
 version: 0.0.1
 repository: https://github.com/josxha/dart_mbtiles
 issue_tracker: https://github.com/josxha/dart_mbtiles/issues
@@ -11,7 +11,6 @@ dependencies:
   mbtiles:
   path: ^1.8.3
   path_provider: ^2.0.0
-  sqlite3_flutter_libs: ^0.5.18
 
 dependency_overrides:
   mbtiles:
