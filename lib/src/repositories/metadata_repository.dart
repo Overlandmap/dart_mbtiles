@@ -11,7 +11,6 @@ class MetadataRepository {
     final map = <String, String>{};
     for (final row in rows) {
       final name = row['name'] as String;
-      if (row['value'] == null) print(name);
       final value = row['value'] as String;
       map[name] = value;
     }

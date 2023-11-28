@@ -98,6 +98,21 @@ class MBTilesMetadata {
         version == o.version &&
         json == o.json;
   }
+
+  @override
+  int get hashCode => Object.hash(
+        name,
+        format,
+        bounds,
+        defaultCenter,
+        defaultZoom,
+        minZoom,
+        maxZoom,
+        attributionHtml,
+        description,
+        version,
+        json,
+      );
 }
 
 enum TileLayerType {
