@@ -1,5 +1,4 @@
 import 'dart:ffi';
-import 'dart:io';
 
 import 'package:mbtiles/mbtiles.dart';
 import 'package:mbtiles/src/repositories/metadata_repository.dart';
@@ -11,8 +10,6 @@ import '../utils.dart';
 
 void main() {
   test('Put and get Metadata', () {
-    // ignore: avoid_print
-    print(Directory.current);
     // given
     const metadata1 = MBTilesMetadata(
       name: 'Example MBTiles',
