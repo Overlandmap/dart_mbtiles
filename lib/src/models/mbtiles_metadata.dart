@@ -1,4 +1,7 @@
+import 'package:meta/meta.dart';
+
 /// The model class for the mbtiles metadata table
+@immutable
 class MBTilesMetadata {
   /// The human-readable name of the tileset. (must contain)
   final String name;
@@ -47,7 +50,7 @@ class MBTilesMetadata {
   /// (must contain if format is pbf)
   final String? json;
 
-  MBTilesMetadata({
+  const MBTilesMetadata({
     required this.name,
     required this.format,
     this.bounds,
@@ -78,6 +81,22 @@ class MBTilesMetadata {
     if (version != null) result += ', version: $version';
     if (json != null) result += ', json: $json';
     return '$result}';
+  }
+
+  @override
+  bool operator ==(Object o) {
+    if (o is! MBTilesMetadata) return false;
+    return name == o.name &&
+        format == o.format &&
+        bounds == o.bounds &&
+        defaultCenter == o.defaultCenter &&
+        defaultZoom == o.defaultZoom &&
+        minZoom == o.minZoom &&
+        maxZoom == o.maxZoom &&
+        attributionHtml == o.attributionHtml &&
+        description == o.description &&
+        version == o.version &&
+        json == o.json;
   }
 }
 

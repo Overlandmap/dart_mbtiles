@@ -2,15 +2,16 @@ import 'package:mbtiles/mbtiles.dart';
 import 'package:sqlite3/sqlite3.dart';
 
 class MetadataRepository {
-  final Database _database;
+  final Database database;
 
-  const MetadataRepository(this._database);
+  const MetadataRepository({required this.database});
 
   MBTilesMetadata getAll() {
-    final rows = _database.select('SELECT * FROM metadata');
+    final rows = database.select('SELECT * FROM metadata');
     final map = <String, String>{};
     for (final row in rows) {
       final name = row['name'] as String;
+      if (row['value'] == null) print(name);
       final value = row['value'] as String;
       map[name] = value;
     }
@@ -67,4 +68,59 @@ class MetadataRepository {
             'The MBTiles file contains an unsupported tile layer type: $raw',
           ),
       };
+
+  void createTable() => database.execute('''
+      CREATE TABLE metadata (name text PRIMARY KEY, value text);
+      ''');
+
+  void dispose() {}
+
+  void putAll(MBTilesMetadata metadata) {
+    assert(
+      metadata.defaultCenter == null && metadata.defaultZoom == null ||
+          metadata.defaultCenter != null && metadata.defaultZoom != null,
+      'Default center and zoom need to be both set if one is set.',
+    );
+
+    final stmt = database.prepare('''
+        INSERT OR REPLACE INTO metadata
+        (name, value) 
+        VALUES (?, ?);
+        ''');
+    stmt.execute(['name', metadata.name]);
+    stmt.execute(['format', metadata.format]);
+    if (metadata.bounds != null) {
+      stmt.execute([
+        'bounds',
+        '${metadata.bounds!.$1.$1},${metadata.bounds!.$1.$2},${metadata.bounds!.$2.$1},${metadata.bounds!.$2.$2}',
+      ]);
+    }
+    if (metadata.type != null) {
+      stmt.execute(['type', metadata.type!.name]);
+    }
+    if (metadata.defaultZoom != null && metadata.defaultCenter != null) {
+      stmt.execute([
+        'center',
+        '${metadata.defaultCenter?.$1},${metadata.defaultCenter?.$2},${metadata.defaultZoom}',
+      ]);
+    }
+    if (metadata.attributionHtml != null) {
+      stmt.execute(['attribution', metadata.attributionHtml]);
+    }
+    if (metadata.description != null) {
+      stmt.execute(['description', metadata.description]);
+    }
+    if (metadata.json != null) {
+      stmt.execute(['json', metadata.json]);
+    }
+    if (metadata.maxZoom != null) {
+      stmt.execute(['max_zoom', metadata.maxZoom]);
+    }
+    if (metadata.minZoom != null) {
+      stmt.execute(['min_zoom', metadata.minZoom]);
+    }
+    if (metadata.version != null) {
+      stmt.execute(['version', metadata.version]);
+    }
+  }
 }
