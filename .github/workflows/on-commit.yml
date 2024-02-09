@@ -4,8 +4,9 @@ on:
   push:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  analyze-and-test:
+    # sqlite3 library can't get used on linux at the moment
+    runs-on: windows-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
