@@ -1,17 +1,19 @@
-import 'dart:ffi';
 import 'dart:typed_data';
 
-import 'package:mbtiles/mbtiles.dart';
-import 'package:mbtiles/src/repositories/metadata_repository.dart';
-import 'package:mbtiles/src/repositories/tiles_repository.dart';
-import 'package:sqlite3/open.dart';
-import 'package:sqlite3/sqlite3.dart';
+import 'package:mbtiles/src/helper/helpers.dart'
+    if (dart.library.html) 'package:mbtiles/src/helper/helpers_web.dart';
+import 'package:mbtiles/src/model/mbtiles_metadata.dart';
+import 'package:mbtiles/src/repository/metadata.dart';
+import 'package:mbtiles/src/repository/tiles.dart';
+import 'package:sqlite3/common.dart';
+import 'package:sqlite3/sqlite3.dart'
+    if (dart.library.html) 'package:sqlite3/wasm.dart';
 
 class MBTiles {
   static const _notEditableAssertMsg =
       'Database not editable, please set the parameter '
       '`MBTiles(..., editable: true).';
-  late final Database _database;
+  late final CommonDatabase _database;
   late final MetadataRepository _metadataRepo;
   late final TilesRepository _tileRepo;
 
@@ -32,9 +34,10 @@ class MBTiles {
     bool? isPBF,
     this.editable = false,
   }) {
-    if (sqlitePath != null) {
-      open.overrideForAll(() => DynamicLibrary.open(sqlitePath));
-    }
+    if (_kIsWeb) throw UnimplementedError('Web is not supported');
+
+    loadSqLiteLib(sqlitePath);
+
     _database = sqlite3.open(
       mbtilesPath,
       mode: editable ? OpenMode.readWriteCreate : OpenMode.readOnly,
@@ -70,8 +73,9 @@ class MBTiles {
 
   /// Call dispose to correctly close the sqlite database
   void dispose() {
-    _metadataRepo.dispose();
     _tileRepo.dispose();
     _database.dispose();
   }
 }
+
+const bool _kIsWeb = bool.fromEnvironment('dart.library.js_util');

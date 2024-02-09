@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:io' if (dart.library.html) 'dart:html';
 import 'dart:typed_data';
 
 extension U8intListExtension on Uint8List {

@@ -1,13 +1,13 @@
 import 'dart:typed_data';
 
-import 'package:mbtiles/src/extensions.dart';
-import 'package:sqlite3/sqlite3.dart';
+import 'package:mbtiles/src/utils.dart';
+import 'package:sqlite3/common.dart';
 
 class TilesRepository {
-  final Database database;
+  final CommonDatabase database;
   final bool useGzip;
 
-  PreparedStatement? _putTileStmt;
+  CommonPreparedStatement? _putTileStmt;
 
   TilesRepository({
     required this.database,

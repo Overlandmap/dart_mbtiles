@@ -1,8 +1,8 @@
 import 'package:mbtiles/mbtiles.dart';
-import 'package:sqlite3/sqlite3.dart';
+import 'package:sqlite3/common.dart';
 
 class MetadataRepository {
-  final Database database;
+  final CommonDatabase database;
 
   const MetadataRepository({required this.database});
 
@@ -71,8 +71,6 @@ class MetadataRepository {
   void createTable() => database.execute('''
       CREATE TABLE metadata (name text PRIMARY KEY, value text);
       ''');
-
-  void dispose() {}
 
   void putAll(MBTilesMetadata metadata) {
     assert(

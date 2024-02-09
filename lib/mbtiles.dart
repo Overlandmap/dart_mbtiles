@@ -1,2 +1,2 @@
 export 'src/mbtiles.dart';
-export 'src/models/mbtiles_metadata.dart';
+export 'src/model/mbtiles_metadata.dart';
