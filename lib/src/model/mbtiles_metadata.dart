@@ -67,7 +67,7 @@ class MBTilesMetadata {
 
   @override
   String toString() {
-    var result = 'MBTilesMetadata{name: "$name", format: "$format"';
+    var result = 'MBTilesMetadata(name: "$name", format: "$format"';
     if (bounds != null) result += ', bounds: $bounds';
     if (defaultCenter != null) result += ', defaultCenter: $defaultCenter';
     if (defaultZoom != null) result += ', defaultZoom: $defaultZoom';
@@ -80,7 +80,7 @@ class MBTilesMetadata {
     if (type != null) result += ', type: $type';
     if (version != null) result += ', version: $version';
     if (json != null) result += ', json: $json';
-    return '$result}';
+    return '$result)';
   }
 
   @override
