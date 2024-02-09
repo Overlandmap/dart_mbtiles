@@ -5,11 +5,26 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: dart-lang/setup-dart@v1
-      - run: dart pub get
-      - run: dart format --output=none --set-exit-if-changed .
-      - run: dart analyze --fatal-infos
-      - run: dart test
+      - name: Checkout code
+        uses: actions/checkout@v3
+      # Use flutter instead of just dart to run tests with coverage
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+      - name: Get dependencies
+        run: dart pub get
+      - name: Check formatted
+        run: dart format --output=none --set-exit-if-changed .
+      - name: Check lints
+        run: dart analyze --fatal-infos
+      - name: Test
+        run: dart test --no-pub -r expanded --coverage
+      - name: Test for web
+        run: flutter test test/mbtiles_web_test.dart --platform chrome
+      - name: Run Codecov
+        uses: codecov/codecov-action@v4
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
