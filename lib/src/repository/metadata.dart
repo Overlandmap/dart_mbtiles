@@ -1,4 +1,4 @@
-import 'package:mbtiles/mbtiles.dart';
+import 'package:mbtiles/src/model/mbtiles_metadata.dart';
 import 'package:sqlite3/common.dart';
 
 class MetadataRepository {

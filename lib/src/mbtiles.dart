@@ -1,13 +1,13 @@
 import 'dart:typed_data';
 
-import 'package:mbtiles/src/helper/helpers.dart'
-    if (dart.library.html) 'package:mbtiles/src/helper/helpers_web.dart';
+import 'package:mbtiles/src/helper/helpers_io.dart'
+    if (dart.library.js_util) 'package:mbtiles/src/helper/helpers_web.dart';
 import 'package:mbtiles/src/model/mbtiles_metadata.dart';
 import 'package:mbtiles/src/repository/metadata.dart';
 import 'package:mbtiles/src/repository/tiles.dart';
 import 'package:sqlite3/common.dart';
 import 'package:sqlite3/sqlite3.dart'
-    if (dart.library.html) 'package:sqlite3/wasm.dart';
+    if (dart.library.js_util) 'package:sqlite3/wasm.dart';
 
 class MBTiles {
   static const _notEditableAssertMsg =
