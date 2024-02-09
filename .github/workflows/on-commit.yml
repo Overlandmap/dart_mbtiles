@@ -21,9 +21,9 @@ jobs:
       - name: Check lints
         run: dart analyze --fatal-infos
       - name: Test
-        run: dart test --no-pub -r expanded --coverage
+        run: flutter test --no-pub -r expanded --coverage
       - name: Test for web
-        run: flutter test test/mbtiles_web_test.dart --platform chrome
+        run: dart test test/mbtiles_web_test.dart --platform chrome
       - name: Run Codecov
         uses: codecov/codecov-action@v4
         env:
