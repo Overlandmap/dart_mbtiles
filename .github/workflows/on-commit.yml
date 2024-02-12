@@ -4,7 +4,22 @@ on:
   push:
 
 jobs:
-  analyze-and-test:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+      - name: Get dependencies
+        run: dart pub get
+      - name: Check formatted
+        run: dart format --output=none --set-exit-if-changed .
+      - name: Check lints
+        run: dart analyze --fatal-infos
+  test:
     # sqlite3 library can't be used on linux at the moment
     runs-on: windows-latest
     steps:
@@ -29,3 +44,18 @@ jobs:
         uses: codecov/codecov-action@v4
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  package-score:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+      - name: Get dependencies
+        run: dart pub get
+      - name: Install pana
+        run: dart pub global activate pana
+      - name: Check package score for all
+        run: pana --no-dartdoc .
