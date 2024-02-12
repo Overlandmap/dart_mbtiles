@@ -39,7 +39,7 @@ jobs:
       - name: Test
         run: flutter test --no-pub -r expanded --coverage
       - name: Test for web
-        run: dart test test/mbtiles_web_test.dart --platform chrome --no-pub -r expanded
+        run: dart test test/mbtiles_web_test.dart --platform chrome
       - name: Run Codecov
         uses: codecov/codecov-action@v4
         env:
