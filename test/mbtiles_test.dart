@@ -14,11 +14,13 @@ void main() {
     );
   });
   test('Open read write raster Database', () {
-    final _ = MbTiles(
+    final mbtiles = MbTiles(
       mbtilesPath: rasterMbtilesPath,
       sqlitePath: sqliteLibPath,
       editable: true,
     );
+    expect(mbtiles.getTile(z: 0, x: 0, y: 0), isA<Uint8List>());
+    expect(mbtiles.getTile(z: 20, x: 123, y: 456), isNull);
   });
   test('Create Database', () {
     final file = File('tmp.mbtiles');
