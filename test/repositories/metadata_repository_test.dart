@@ -12,7 +12,7 @@ import '../utils.dart';
 void main() {
   test('Put and get Metadata', () {
     // given
-    const metadata1 = MBTilesMetadata(
+    const metadata1 = MbTilesMetadata(
       name: 'Example MBTiles',
       format: 'pbf',
       minZoom: 1,
@@ -40,7 +40,7 @@ void main() {
   });
   test('Metadata toString', () {
     // given
-    const metadata1 = MBTilesMetadata(
+    const metadata1 = MbTilesMetadata(
       name: 'Example MBTiles',
       format: 'pbf',
       minZoom: 1,
@@ -61,7 +61,7 @@ void main() {
   });
   test('Metadata hashCode equals', () {
     // given
-    const metadata1 = MBTilesMetadata(
+    const metadata1 = MbTilesMetadata(
       name: 'Example MBTiles',
       format: 'pbf',
       minZoom: 1,
@@ -74,7 +74,7 @@ void main() {
       attributionHtml: "Not a real attribution message",
       bounds: MbTilesBounds(bottom: -180, left: -90, top: 180, right: 90),
     );
-    const metadata2 = MBTilesMetadata(
+    const metadata2 = MbTilesMetadata(
       name: 'Example MBTiles',
       format: 'pbf',
       minZoom: 1,
@@ -91,7 +91,7 @@ void main() {
   });
   test('Metadata hashCode not equal', () {
     // given
-    const metadata1 = MBTilesMetadata(
+    const metadata1 = MbTilesMetadata(
       name: 'Example MBTiles',
       format: 'pbf',
       minZoom: 1,
@@ -104,7 +104,7 @@ void main() {
       attributionHtml: "Not a real attribution message",
       bounds: MbTilesBounds(bottom: -180, left: -90, top: 180, right: 90),
     );
-    const metadata2 = MBTilesMetadata(
+    const metadata2 = MbTilesMetadata(
       name: 'Example MBTiles2',
       format: 'pbf',
       minZoom: 1,

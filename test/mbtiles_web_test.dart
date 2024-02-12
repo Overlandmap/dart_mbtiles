@@ -15,7 +15,7 @@ void main() {
     expect(
       () => MbTiles.create(
         mbtilesPath: 'noRealFile.mbtiles',
-        metadata: const MBTilesMetadata(name: 'Test', format: 'pbf'),
+        metadata: const MbTilesMetadata(name: 'Test', format: 'pbf'),
       ),
       throwsA(const TypeMatcher<UnimplementedError>()),
     );

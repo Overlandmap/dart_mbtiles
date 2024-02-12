@@ -28,7 +28,7 @@ void main() {
     final mbTiles = MbTiles.create(
       mbtilesPath: file.path,
       sqlitePath: sqliteLibPath,
-      metadata: const MBTilesMetadata(name: 'TestFile', format: 'pbf'),
+      metadata: const MbTilesMetadata(name: 'TestFile', format: 'pbf'),
     );
     mbTiles.putTile(z: 0, x: 0, y: 0, bytes: Uint8List(0));
     mbTiles.dispose();

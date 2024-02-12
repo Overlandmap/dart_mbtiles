@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 
 /// The model class for the mbtiles metadata table
 @immutable
-class MBTilesMetadata {
+class MbTilesMetadata {
   /// The human-readable name of the tileset. (must contain)
   final String name;
 
@@ -51,7 +51,7 @@ class MBTilesMetadata {
   /// (must contain if format is pbf)
   final String? json;
 
-  const MBTilesMetadata({
+  const MbTilesMetadata({
     required this.name,
     required this.format,
     this.bounds,
@@ -86,7 +86,7 @@ class MBTilesMetadata {
 
   @override
   bool operator ==(Object o) {
-    if (o is! MBTilesMetadata) return false;
+    if (o is! MbTilesMetadata) return false;
     return name == o.name &&
         format == o.format &&
         bounds == o.bounds &&
@@ -155,3 +155,6 @@ class MbTilesBounds {
   @override
   String toString() => 'MbTilesBounds($bottom, $left, $top, $right)';
 }
+
+@Deprecated('MBTilesMetadata has been renamed to MbTilesMetadata')
+typedef MBTilesMetadata = MbTilesMetadata;

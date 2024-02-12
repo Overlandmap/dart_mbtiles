@@ -1,6 +1,10 @@
+## [0.3.1] 2024-02-12
+
+- Add deprecations for `MBTiles` and `MBTilesMetadata`
+
 ## [0.3.0] 2024-02-12
 
-- Rename `MBTiles` to `MbTiles`.
+- Rename `MBTiles` to `MbTiles`, rename `MBTilesMetadata` to `MbTilesMetadata`.
 - add `MbTiles.create()` constructor to create new MBTiles files.
 - Coordinates are now a LatLng using the package `latlong2`.
 - `bounds` are now a instance of `MbTilesBounds`.

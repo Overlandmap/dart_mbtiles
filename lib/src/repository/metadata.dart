@@ -7,7 +7,7 @@ class MetadataRepository {
 
   const MetadataRepository({required this.database});
 
-  MBTilesMetadata getAll() {
+  MbTilesMetadata getAll() {
     final rows = database.select('SELECT * FROM metadata');
     final map = <String, String>{};
     for (final row in rows) {
@@ -50,7 +50,7 @@ class MetadataRepository {
       zoom = double.parse(z);
     }
 
-    return MBTilesMetadata(
+    return MbTilesMetadata(
       name: map['name']!,
       format: map['format']!,
       type: _parseTileLayerType(map['type']),
@@ -79,7 +79,7 @@ class MetadataRepository {
       CREATE TABLE metadata (name text PRIMARY KEY, value text);
       ''');
 
-  void putAll(MBTilesMetadata metadata) {
+  void putAll(MbTilesMetadata metadata) {
     assert(
       metadata.defaultCenter == null && metadata.defaultZoom == null ||
           metadata.defaultCenter != null && metadata.defaultZoom != null,

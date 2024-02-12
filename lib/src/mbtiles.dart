@@ -24,7 +24,7 @@ class MbTiles {
   final bool editable;
 
   /// cached metadata values
-  MBTilesMetadata? _metadata;
+  MbTilesMetadata? _metadata;
 
   /// Open a MBTiles file.
   /// Use the [sqlitePath] parameter if you don't use the
@@ -59,7 +59,7 @@ class MbTiles {
   /// flag is optional but will gain a small performance benefit at the begin.
   MbTiles.create({
     required String mbtilesPath,
-    required MBTilesMetadata metadata,
+    required MbTilesMetadata metadata,
     String? sqlitePath,
   }) : editable = true {
     if (_kIsWeb) throw UnimplementedError('Web is not supported');
@@ -81,7 +81,7 @@ class MbTiles {
   }
 
   /// Cached metadata that is stored inside the mbtiles file.
-  MBTilesMetadata getMetadata({bool allowCache = true}) {
+  MbTilesMetadata getMetadata({bool allowCache = true}) {
     if (_metadata != null && allowCache) return _metadata!;
     return _metadata = _metadataRepo.getAll();
   }
@@ -119,7 +119,7 @@ class MbTiles {
   /// Set the metadata of the MBTiles file.
   ///
   /// Requires [editable] to be true.
-  void setMetadata(MBTilesMetadata metadata) {
+  void setMetadata(MbTilesMetadata metadata) {
     assert(editable, _notEditableAssertMsg);
     _metadataRepo.putAll(metadata);
   }
@@ -132,3 +132,6 @@ class MbTiles {
 }
 
 const bool _kIsWeb = bool.fromEnvironment('dart.library.js_util');
+
+@Deprecated('MBTiles has been renamed to MbTiles')
+typedef MBTiles = MbTiles;
