@@ -1,3 +1,10 @@
+## [0.3.0] 2024-mm-dd
+
+- Coordinates are now a LatLng using the package `latlong2`.
+- `bounds` are now a instance of `MbTilesBounds`.
+- `getTile()` now requires named parameters.
+- Clean up dependencies.
+
 ## [0.2.0] 2024-02-09
 
 - The package can now be compiled on Flutter Web. Note that MBTiles can still

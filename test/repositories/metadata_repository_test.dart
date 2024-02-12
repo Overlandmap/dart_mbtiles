@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:latlong2/latlong.dart';
 import 'package:mbtiles/mbtiles.dart';
 import 'package:mbtiles/src/repository/metadata.dart';
 import 'package:sqlite3/open.dart';
@@ -20,10 +21,10 @@ void main() {
       json: "{}",
       description: "A small description",
       defaultZoom: 6,
-      defaultCenter: (47, 9),
+      defaultCenter: LatLng(47, 9),
       type: TileLayerType.baseLayer,
       attributionHtml: "Not a real attribution message",
-      bounds: ((-180, -90), (180, 90)),
+      bounds: MbTilesBounds(bottom: -180, left: -90, top: 180, right: 90),
     );
     open.overrideForAll(() => DynamicLibrary.open(sqliteLibPath));
     final database = sqlite3.openInMemory();
@@ -48,10 +49,10 @@ void main() {
       json: "{}",
       description: "A small description",
       defaultZoom: 6,
-      defaultCenter: (47, 9),
+      defaultCenter: LatLng(47, 9),
       attributionHtml: "Not a real attribution message",
       type: TileLayerType.baseLayer,
-      bounds: ((-180, -90), (180, 90)),
+      bounds: MbTilesBounds(bottom: -180, left: -90, top: 180, right: 90),
     );
     expect(metadata1.toString(), contains('Example MBTiles'));
     expect(metadata1.toString(), contains('A small description'));
@@ -69,9 +70,9 @@ void main() {
       json: "{}",
       description: "A small description",
       defaultZoom: 6,
-      defaultCenter: (47, 9),
+      defaultCenter: LatLng(47, 9),
       attributionHtml: "Not a real attribution message",
-      bounds: ((-180, -90), (180, 90)),
+      bounds: MbTilesBounds(bottom: -180, left: -90, top: 180, right: 90),
     );
     const metadata2 = MBTilesMetadata(
       name: 'Example MBTiles',
@@ -82,9 +83,9 @@ void main() {
       json: "{}",
       description: "A small description",
       defaultZoom: 6,
-      defaultCenter: (47, 9),
+      defaultCenter: LatLng(47, 9),
       attributionHtml: "Not a real attribution message",
-      bounds: ((-180, -90), (180, 90)),
+      bounds: MbTilesBounds(bottom: -180, left: -90, top: 180, right: 90),
     );
     expect(metadata1.hashCode, equals(metadata2.hashCode));
   });
@@ -99,9 +100,9 @@ void main() {
       json: "{}",
       description: "A small description",
       defaultZoom: 6,
-      defaultCenter: (47, 9),
+      defaultCenter: LatLng(47, 9),
       attributionHtml: "Not a real attribution message",
-      bounds: ((-180, -90), (180, 90)),
+      bounds: MbTilesBounds(bottom: -180, left: -90, top: 180, right: 90),
     );
     const metadata2 = MBTilesMetadata(
       name: 'Example MBTiles2',
@@ -112,9 +113,9 @@ void main() {
       json: "{}",
       description: "A small description",
       defaultZoom: 6,
-      defaultCenter: (47, 9),
+      defaultCenter: LatLng(47, 9),
       attributionHtml: "Not a real attribution message",
-      bounds: ((-180, -90), (180, 90)),
+      bounds: MbTilesBounds(bottom: -180, left: -90, top: 180, right: 90),
     );
     expect(metadata1.hashCode != metadata2.hashCode, isTrue);
   });

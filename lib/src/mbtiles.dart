@@ -18,6 +18,9 @@ class MBTiles {
   late final TilesRepository _tileRepo;
 
   /// Set to true if the mbtiles database can be modified, defaults to false.
+  ///
+  /// If the archive is not marked as editable the SQLite database gets opened
+  /// as read-only.
   final bool editable;
 
   /// cached metadata values
@@ -56,7 +59,12 @@ class MBTiles {
   }
 
   /// Fetch the data for a tile, returns null if the tile is not found
-  Uint8List? getTile(int z, int x, int y) => _tileRepo.getTile(z, x, y);
+  Uint8List? getTile({
+    required int z,
+    required int x,
+    required int y,
+  }) =>
+      _tileRepo.getTile(z, x, y);
 
   /// Create all tables for the mbtiles file
   void createTables() {

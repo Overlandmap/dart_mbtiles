@@ -1,3 +1,4 @@
+import 'package:latlong2/latlong.dart';
 import 'package:meta/meta.dart';
 
 /// The model class for the mbtiles metadata table
@@ -15,27 +16,27 @@ class MBTilesMetadata {
   /// and longitude values, in the OpenLayers Bounds format (left, bottom,
   /// right, top). For example, the bounds of the full Earth, minus the poles,
   /// would be: -180.0,-85,180,85. (should contain)
-  final ((double, double), (double, double))? bounds;
+  final MbTilesBounds? bounds;
 
   /// The longitude, latitude of the default view of the map. (should contain)
-  final (double, double)? defaultCenter;
+  final LatLng? defaultCenter;
 
   /// The zoom level of the default view of the map. (should contain)
   final double? defaultZoom;
 
   /// The lowest zoom level for which the tileset provides data.
   /// (should contain)
-  final int? minZoom;
+  final double? minZoom;
 
   /// The highest zoom level for which the tileset provides data.
   /// (should contain)
-  final int? maxZoom;
+  final double? maxZoom;
 
   /// An attribution string, which explains the sources of data and/or style
   /// for the map. (may contain)
   final String? attributionHtml;
 
-  /// A description of the tileset's content. (may contain)
+  /// A description of the fileset's content. (may contain)
   final String? description;
 
   /// Tile layer type, overlay or baselayer (may contain)
@@ -43,7 +44,7 @@ class MBTilesMetadata {
 
   /// The version of the tileset. This refers to a revision of the tileset
   /// itself, not of the MBTiles specification. (may contain)
-  final int? version;
+  final double? version;
 
   /// Lists the layers that appear in the vector tiles and the names and types
   /// of the attributes of features that appear in those layers.
@@ -125,4 +126,32 @@ enum TileLayerType {
 
   @override
   String toString() => name;
+}
+
+@immutable
+class MbTilesBounds {
+  final double bottom;
+  final double left;
+  final double top;
+  final double right;
+
+  const MbTilesBounds({
+    required this.bottom,
+    required this.left,
+    required this.top,
+    required this.right,
+  });
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MbTilesBounds &&
+          runtimeType == other.runtimeType &&
+          top == other.top;
+
+  @override
+  int get hashCode => top.hashCode;
+
+  @override
+  String toString() => 'MbTilesBounds($bottom, $left, $top, $right)';
 }

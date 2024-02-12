@@ -22,7 +22,10 @@ Mapbox MBTiles v1.3 files, support for vector and raster tiles.
 ```yaml
 dependencies:
   # this package:
-  mbtiles: ^0.0.1
+  mbtiles: ^0.3.0
+  # coordinates will be returned as `LatLng`, include the following package 
+  # if you want to work with them.
+  latlong2: ^0.9.0
   # sqlite libraries in case not otherwise bundled (requires flutter):
   sqlite3_flutter_libs: ^0.5.18
 ```
@@ -43,7 +46,7 @@ final mbtiles = MBTiles(
 // get metadata
 final metadata = mbtiles.getMetadata();
 // get tile data
-final tile = mbtiles.getTile(0, 0, 0);
+final tile = mbtiles.getTile(z: 0, x: 0, y: 0);
 
 // close mbtiles
 mbtiles.dispose();

@@ -1,3 +1,4 @@
+import 'package:latlong2/latlong.dart';
 import 'package:mbtiles/src/model/mbtiles_metadata.dart';
 import 'package:sqlite3/common.dart';
 
@@ -25,22 +26,28 @@ class MetadataRepository {
     );
 
     // tile layer bounds
-    ((double, double), (double, double))? bounds;
-    if (map.containsKey('bounds')) {
-      final values = map['bounds']!.split(',');
-      bounds = (
-        (double.parse(values[0]), double.parse(values[1])),
-        (double.parse(values[2]), double.parse(values[3])),
+    MbTilesBounds? bounds;
+    if (map['bounds']?.split(',')
+        case [
+          final left,
+          final bottom,
+          final right,
+          final top,
+        ]) {
+      bounds = MbTilesBounds(
+        left: double.parse(left),
+        bottom: double.parse(bottom),
+        right: double.parse(right),
+        top: double.parse(top),
       );
     }
 
     // default tile layer center and zoom level
-    (double, double)? center;
+    LatLng? center;
     double? zoom;
-    if (map.containsKey('center')) {
-      final values = map['center']!.split(',');
-      center = (double.parse(values[0]), double.parse(values[1]));
-      zoom = double.parse(values[2]);
+    if (map['center']?.split(',') case [final long, final lat, final z]) {
+      center = LatLng(double.parse(lat), double.parse(long));
+      zoom = double.parse(z);
     }
 
     return MBTilesMetadata(
@@ -53,9 +60,9 @@ class MetadataRepository {
       defaultZoom: zoom,
       description: map['description'],
       json: map['json'],
-      maxZoom: map['max_zoom'] == null ? null : int.parse(map['max_zoom']!),
-      minZoom: map['min_zoom'] == null ? null : int.parse(map['min_zoom']!),
-      version: map['version'] == null ? null : int.parse(map['version']!),
+      maxZoom: map['max_zoom'] == null ? null : double.parse(map['max_zoom']!),
+      minZoom: map['min_zoom'] == null ? null : double.parse(map['min_zoom']!),
+      version: map['version'] == null ? null : double.parse(map['version']!),
     );
   }
 
@@ -89,7 +96,8 @@ class MetadataRepository {
     if (metadata.bounds != null) {
       stmt.execute([
         'bounds',
-        '${metadata.bounds!.$1.$1},${metadata.bounds!.$1.$2},${metadata.bounds!.$2.$1},${metadata.bounds!.$2.$2}',
+        '${metadata.bounds!.left},${metadata.bounds!.bottom},' +
+            '${metadata.bounds!.right},${metadata.bounds!.top}',
       ]);
     }
     if (metadata.type != null) {
@@ -98,7 +106,7 @@ class MetadataRepository {
     if (metadata.defaultZoom != null && metadata.defaultCenter != null) {
       stmt.execute([
         'center',
-        '${metadata.defaultCenter?.$1},${metadata.defaultCenter?.$2},${metadata.defaultZoom}',
+        '${metadata.defaultCenter!.longitude},${metadata.defaultCenter!.latitude},${metadata.defaultZoom}',
       ]);
     }
     if (metadata.attributionHtml != null) {

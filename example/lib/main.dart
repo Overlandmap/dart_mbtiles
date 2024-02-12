@@ -24,7 +24,7 @@ void main() {
   print(metadata);
 
   // get tile data
-  final rasterTile = rasterMbtiles.getTile(0, 0, 0);
+  final rasterTile = rasterMbtiles.getTile(z: 0, x: 0, y: 0);
   final rasterTileSize = rasterTile?.length ?? 0;
   print('Tile size: ${formatSize(rasterTileSize)}\n');
 
@@ -43,7 +43,7 @@ void main() {
   print(vectorMbtiles.getMetadata());
 
   // get tile data
-  final vectorTile = vectorMbtiles.getTile(0, 0, 0);
+  final vectorTile = vectorMbtiles.getTile(z: 0, x: 0, y: 0);
   final vectorTileSize = vectorTile?.length ?? 0;
   print('Uncompressed tile size: ${formatSize(vectorTileSize)}');
 
