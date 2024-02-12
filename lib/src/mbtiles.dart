@@ -9,7 +9,7 @@ import 'package:sqlite3/common.dart';
 import 'package:sqlite3/sqlite3.dart'
     if (dart.library.js_util) 'package:sqlite3/wasm.dart';
 
-class MBTiles {
+class MbTiles {
   static const _notEditableAssertMsg =
       'Database not editable, please set the parameter '
       '`MBTiles(..., editable: true).';
@@ -31,7 +31,7 @@ class MBTiles {
   /// `sqlite3_flutter_libs` package.
   /// Set [isPBF] to true if the format of the mbtiles file is vector pbf. This
   /// flag is optional but will gain a small performance benefit at the begin.
-  MBTiles({
+  MbTiles({
     required String mbtilesPath,
     String? sqlitePath,
     bool? isPBF,
@@ -52,13 +52,44 @@ class MBTiles {
     );
   }
 
-  /// Cached metadata that is stored inside the mbtiles file
+  /// Open a MBTiles file.
+  /// Use the [sqlitePath] parameter if you don't use the
+  /// `sqlite3_flutter_libs` package.
+  /// Set [isPBF] to true if the format of the mbtiles file is vector pbf. This
+  /// flag is optional but will gain a small performance benefit at the begin.
+  MbTiles.create({
+    required String mbtilesPath,
+    required MBTilesMetadata metadata,
+    String? sqlitePath,
+  }) : editable = true {
+    if (_kIsWeb) throw UnimplementedError('Web is not supported');
+
+    loadSqLiteLib(sqlitePath);
+
+    _database = sqlite3.open(
+      mbtilesPath,
+      mode: editable ? OpenMode.readWriteCreate : OpenMode.readOnly,
+    );
+    _metadataRepo = MetadataRepository(database: _database);
+    _tileRepo = TilesRepository(
+      database: _database,
+      useGzip: metadata.format == 'pbf',
+    );
+
+    // create tables
+    _metadataRepo.createTable();
+    _tileRepo.createTable();
+    // insert metadata
+    _metadataRepo.putAll(metadata);
+  }
+
+  /// Cached metadata that is stored inside the mbtiles file.
   MBTilesMetadata getMetadata({bool allowCache = true}) {
     if (_metadata != null && allowCache) return _metadata!;
     return _metadata = _metadataRepo.getAll();
   }
 
-  /// Fetch the data for a tile, returns null if the tile is not found
+  /// Fetch the data for a tile, returns null if the tile is not found.
   Uint8List? getTile({
     required int z,
     required int x,
@@ -66,17 +97,34 @@ class MBTiles {
   }) =>
       _tileRepo.getTile(z, x, y);
 
-  /// Create all tables for the mbtiles file
+  /// Create all tables for the mbtiles file.
+  ///
+  /// Requires [editable] to be true.
   void createTables() {
     assert(editable, _notEditableAssertMsg);
     _metadataRepo.createTable();
     _tileRepo.createTable();
   }
 
-  /// Inserts or updates a tile
-  void putTile(int z, int x, int y, Uint8List bytes) {
+  /// Inserts or updates a tile.
+  ///
+  /// Requires [editable] to be true.
+  void putTile({
+    required int z,
+    required int x,
+    required int y,
+    required Uint8List bytes,
+  }) {
     assert(editable, _notEditableAssertMsg);
     _tileRepo.putTile(z, x, y, bytes);
+  }
+
+  /// Set the metadata of the MBTiles file.
+  ///
+  /// Requires [editable] to be true.
+  void setMetadata(MBTilesMetadata metadata) {
+    assert(editable, _notEditableAssertMsg);
+    _metadataRepo.putAll(metadata);
   }
 
   /// Call dispose to correctly close the sqlite database

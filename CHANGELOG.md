@@ -1,5 +1,7 @@
 ## [0.3.0] 2024-02-12
 
+- Rename `MBTiles` to `MbTiles`.
+- add `MbTiles.create()` constructor to create new MBTiles files.
 - Coordinates are now a LatLng using the package `latlong2`.
 - `bounds` are now a instance of `MbTilesBounds`.
 - `getTile()` now requires named parameters.

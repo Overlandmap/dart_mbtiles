@@ -8,7 +8,7 @@ void main() {
     if (!kIsWeb) return;
 
     expect(
-      () => MBTiles(mbtilesPath: 'noRealFile.mbtiles'),
+      () => MbTiles(mbtilesPath: 'noRealFile.mbtiles'),
       throwsA(const TypeMatcher<UnimplementedError>()),
     );
   });

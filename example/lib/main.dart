@@ -14,7 +14,7 @@ void main() {
 
   // open mbtiles
   final sep = Platform.pathSeparator;
-  final rasterMbtiles = MBTiles(
+  final rasterMbtiles = MbTiles(
     mbtilesPath: 'assets${sep}mbtiles${sep}countries-raster.mbtiles',
     sqlitePath: sqlitePath,
   );
@@ -34,7 +34,7 @@ void main() {
   print('VECTOR MBTILES');
 
   // open mbtiles
-  final vectorMbtiles = MBTiles(
+  final vectorMbtiles = MbTiles(
     mbtilesPath: 'assets${sep}mbtiles${sep}countries-vector.mbtiles',
     sqlitePath: sqlitePath,
   );
