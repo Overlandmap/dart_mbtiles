@@ -1,4 +1,4 @@
-## [0.3.0] 2024-mm-dd
+## [0.3.0] 2024-02-12
 
 - Coordinates are now a LatLng using the package `latlong2`.
 - `bounds` are now a instance of `MbTilesBounds`.

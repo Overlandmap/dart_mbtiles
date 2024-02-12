@@ -5,11 +5,11 @@ on:
 
 jobs:
   analyze-and-test:
-    # sqlite3 library can't get used on linux at the moment
+    # sqlite3 library can't be used on linux at the moment
     runs-on: windows-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       # Use flutter instead of just dart to run tests with coverage
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -24,7 +24,7 @@ jobs:
       - name: Test
         run: flutter test --no-pub -r expanded --coverage
       - name: Test for web
-        run: dart test test/mbtiles_web_test.dart --platform chrome
+        run: dart test test/mbtiles_web_test.dart --platform chrome --no-pub -r expanded
       - name: Run Codecov
         uses: codecov/codecov-action@v4
         env:
