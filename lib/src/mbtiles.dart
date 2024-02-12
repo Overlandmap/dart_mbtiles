@@ -76,11 +76,8 @@ class MbTiles {
       useGzip: metadata.format == 'pbf',
     );
 
-    // create tables
-    _metadataRepo.createTable();
-    _tileRepo.createTable();
-    // insert metadata
-    _metadataRepo.putAll(metadata);
+    createTables();
+    setMetadata(metadata);
   }
 
   /// Cached metadata that is stored inside the mbtiles file.
