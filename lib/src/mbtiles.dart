@@ -29,12 +29,15 @@ class MbTiles {
   /// Open a MBTiles file.
   /// Use the [sqlitePath] parameter if you don't use the
   /// `sqlite3_flutter_libs` package.
-  /// Set [isPBF] to true if the format of the mbtiles file is vector pbf. This
-  /// flag is optional but will gain a small performance benefit at the begin.
+  ///
+  /// Set [gzip] to true if the format of the mbtiles file is pbf / mvt and the
+  /// tile data is gzip encoded.
+  /// This flag is optional and defaults to true if the format is pbf and to
+  /// false otherwise.
   MbTiles({
     required String mbtilesPath,
     String? sqlitePath,
-    bool? isPBF,
+    bool? gzip,
     this.editable = false,
   }) {
     if (_kIsWeb) throw UnimplementedError('Web is not supported');
@@ -48,7 +51,7 @@ class MbTiles {
     _metadataRepo = MetadataRepository(database: _database);
     _tileRepo = TilesRepository(
       database: _database,
-      useGzip: isPBF ?? getMetadata().format == 'pbf',
+      useGzip: gzip ?? getMetadata().format == 'pbf',
     );
   }
 

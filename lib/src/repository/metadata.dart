@@ -60,8 +60,8 @@ class MetadataRepository {
       defaultZoom: zoom,
       description: map['description'],
       json: map['json'],
-      maxZoom: map['max_zoom'] == null ? null : double.parse(map['max_zoom']!),
-      minZoom: map['min_zoom'] == null ? null : double.parse(map['min_zoom']!),
+      maxZoom: map['maxzoom'] == null ? null : double.parse(map['maxzoom']!),
+      minZoom: map['minzoom'] == null ? null : double.parse(map['minzoom']!),
       version: map['version'] == null ? null : double.parse(map['version']!),
     );
   }
@@ -119,10 +119,10 @@ class MetadataRepository {
       stmt.execute(['json', metadata.json]);
     }
     if (metadata.maxZoom != null) {
-      stmt.execute(['max_zoom', metadata.maxZoom]);
+      stmt.execute(['maxzoom', metadata.maxZoom]);
     }
     if (metadata.minZoom != null) {
-      stmt.execute(['min_zoom', metadata.minZoom]);
+      stmt.execute(['minzoom', metadata.minZoom]);
     }
     if (metadata.version != null) {
       stmt.execute(['version', metadata.version]);

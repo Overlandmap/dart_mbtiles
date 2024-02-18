@@ -1,3 +1,8 @@
+## [0.4.0] 2024-02-18
+
+- Renamed the parameter `isPBF` to `gzip`.
+- Fix metadata `minzoom` and `maxzoom`.
+
 ## [0.3.1] 2024-02-12
 
 - Add deprecations for `MBTiles` and `MBTilesMetadata`
