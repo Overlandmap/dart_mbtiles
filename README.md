@@ -54,10 +54,14 @@ pure dart.
 
 ```dart
 // open as read-only
-final mbtiles = MBTiles(mbtilesPath: 'path/to/your/mbtiles-file.mbtiles');
+final mbtiles = MBTiles(
+   mbtilesPath: 'path/to/your/mbtiles-file.mbtiles',
+);
 // open as writeable database
 final mbtiles = MBTiles(
-    mbtilesPath: 'path/to/your/file.mbtiles', editable: true);
+   mbtilesPath: 'path/to/your/file.mbtiles',
+   editable: true,
+);
 ```
 
 3. Afterward you can request tiles, read the metadata, etc.
