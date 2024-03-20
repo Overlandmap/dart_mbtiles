@@ -1,13 +1,18 @@
 import 'dart:io';
 
-final assetsDirPath = 'example${Platform.pathSeparator}assets';
+final sqliteLibPath = switch (Platform.operatingSystem) {
+  'windows' => r'example\assets\windows\sqlite3.dll',
+  'macos' => 'example/assets/macos/sqlite3',
+  'linux' => 'example/assets/linux/sqlite3',
+  String() => throw Exception(
+    'The example program is dart-only and running it on flutter is '
+        'not supported.\n'
+        'If you want to use this package in a flutter app, head over to '
+        'the package documentation!',
+  ),
+};
 
-final sqliteLibPath = Platform.isWindows
-    ? '$assetsDirPath\\windows\\sqlite3.dll'
-    : '$assetsDirPath/${Platform.operatingSystem}/sqlite3';
+const mbtilesDirPath = 'example/assets/mbtiles';
 
-final mbtilesDirPath =
-    '$assetsDirPath${Platform.pathSeparator}mbtiles${Platform.pathSeparator}';
-
-final vectorMbtilesPath = '${mbtilesDirPath}countries-vector.mbtiles';
-final rasterMbtilesPath = '${mbtilesDirPath}countries-raster.mbtiles';
+const vectorMbtilesPath = '$mbtilesDirPath/countries-vector.mbtiles';
+const rasterMbtilesPath = '$mbtilesDirPath/countries-raster.mbtiles';

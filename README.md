@@ -2,7 +2,7 @@
 
 Mapbox MBTiles v1.3 files, support for vector and raster tiles.
 
-- Supported raster tiles: `jpg`, `png`, `webp` 
+- Supported raster tiles: `jpg`, `png`, `webp`
 - Supported vector tiles: `pbf`
 - Web is not supported because of its missing support for SQLite.
 
@@ -19,40 +19,93 @@ Mapbox MBTiles v1.3 files, support for vector and raster tiles.
 ## Getting started
 
 #### pubspec.yaml
+
 ```yaml
 dependencies:
   # this package:
-  mbtiles: ^0.3.0
+  mbtiles: ^0.4.0
   # coordinates will be returned as `LatLng`, include the following package 
   # if you want to work with them.
   latlong2: ^0.9.0
-  # sqlite libraries in case not otherwise bundled (requires flutter):
+  # sqlite libraries (in case not otherwise bundled)
   sqlite3_flutter_libs: ^0.5.18
 ```
 
 ## Usage
 
+### flutter
+
+1. Ensure that you have added the `sqlite3_flutter_libs` package as a dependency
+   if you don't provide the sqlite3 libraries otherwise.
+2. Open your .mbtiles file.
+    - It is recommended to store the mbtiles file in one of the directories
+      provided by [path_provider](https://pub.dev/packages/path_provider).
+    - The mbtiles file cannot be opened if it is inside your flutter assets!
+      Copy it to your file system first.
+    - If you want to open the file from the internal device storage or SD card,
+      you need to ask for permission first! You can
+      use [permission_handler](https://pub.dev/packages/permission_handler) to
+      request the needed permission from the user.
+
 ```dart
-// Get paths for the current platform (Windows would need "\" instead of "/"). 
-// This is not needed if you use `sqlite3_flutter_libs` on Android or iOS.
-final sqlitePath = 'assets/${Platform.operatingSystem}/sqlite3';
-
-// open mbtiles
+// open as read-only
+final mbtiles = MBTiles(mbtilesPath: 'path/to/your/mbtiles-file.mbtiles');
+// open as writeable database
 final mbtiles = MBTiles(
-  mbtilesPath: 'assets/mbtiles/countries-raster.mbtiles',
-  sqlitePath: sqlitePath,
-);
+    mbtilesPath: 'path/to/your/file.mbtiles', editable: true);
+```
 
+3. Afterward you can request tiles, read the metadata, etc.
+
+```dart
 // get metadata
 final metadata = mbtiles.getMetadata();
 // get tile data
 final tile = mbtiles.getTile(z: 0, x: 0, y: 0);
-
-// close mbtiles
-mbtiles.dispose();
 ```
 
-See the [example program](https://pub.dev/packages/mbtiles/example) for more information.
+4. After you don't need the mbtiles file anymore, close its sqlite database
+   connection.
+
+```dart
+void closeMbTiles() {
+   mbtiles.dispose();
+}
+```
+
+### dart-only
+
+1. Open the mbtiles database.
+   You need to provide the dart program with platform specific sqlite3
+   libraries.
+   Builds are available on [www.sqlite.org](https://www.sqlite.org/download.html)
+
+```dart
+
+final mbtiles = MBTiles(
+  mbtilesPath: 'path/to/your/mbtiles-file.mbtiles',
+  sqlitePath: 'path/to/sqlite3',
+);
+```
+2. Afterward you can request tiles, read the metadata, etc.
+```dart
+// get metadata
+final metadata = mbtiles.getMetadata();
+// get tile data
+final tile = mbtiles.getTile(z: 0, x: 0, y: 0);
+```
+
+3. After you don't need the mbtiles file anymore, close its sqlite database
+connection.
+
+```dart
+void closeMbTiles() {
+   mbtiles.dispose();
+}
+```
+
+See the [example program](https://pub.dev/packages/mbtiles/example) for more
+information.
 
 ## Additional information
 

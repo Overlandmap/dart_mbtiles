@@ -1,3 +1,9 @@
+## [0.4.1] 2024-03-20
+
+- Update documentation
+- Update example
+
+
 ## [0.4.0] 2024-02-18
 
 - Renamed the parameter `isPBF` to `gzip`.
