@@ -33,6 +33,11 @@ dependencies:
 
 ## Usage
 
+This package has by design no flutter dependency to be able to use it in
+dart programs. Please refer to the [flutter instructions](#flutter) if you want
+to use it in a flutter app and [dart-only instructions](#dart-only) to use it in
+pure dart.
+
 ### flutter
 
 1. Ensure that you have added the `sqlite3_flutter_libs` package as a dependency
@@ -69,7 +74,7 @@ final tile = mbtiles.getTile(z: 0, x: 0, y: 0);
 
 ```dart
 void closeMbTiles() {
-   mbtiles.dispose();
+  mbtiles.dispose();
 }
 ```
 
@@ -78,7 +83,8 @@ void closeMbTiles() {
 1. Open the mbtiles database.
    You need to provide the dart program with platform specific sqlite3
    libraries.
-   Builds are available on [www.sqlite.org](https://www.sqlite.org/download.html)
+   Builds are available
+   on [www.sqlite.org](https://www.sqlite.org/download.html)
 
 ```dart
 
@@ -87,7 +93,9 @@ final mbtiles = MBTiles(
   sqlitePath: 'path/to/sqlite3',
 );
 ```
+
 2. Afterward you can request tiles, read the metadata, etc.
+
 ```dart
 // get metadata
 final metadata = mbtiles.getMetadata();
@@ -96,11 +104,11 @@ final tile = mbtiles.getTile(z: 0, x: 0, y: 0);
 ```
 
 3. After you don't need the mbtiles file anymore, close its sqlite database
-connection.
+   connection.
 
 ```dart
 void closeMbTiles() {
-   mbtiles.dispose();
+  mbtiles.dispose();
 }
 ```
 
