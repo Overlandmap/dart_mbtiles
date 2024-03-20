@@ -11,11 +11,11 @@ void main() {
     'macos' => 'assets/macos/sqlite3',
     'linux' => 'assets/linux/sqlite3',
     String() => throw Exception(
-      'The example program is dart-only and running it on flutter is '
-          'not supported.\n'
-          'If you want to use this package in a flutter app, head over to '
-          'the package documentation!',
-    ),
+        'The example program is dart-only and running it on flutter is '
+        'not supported.\n'
+        'If you want to use this package in a flutter app, head over to '
+        'the package documentation!',
+      ),
   };
 
   // ### RASTER MBTILES ###
@@ -51,7 +51,9 @@ void main() {
   // get tile data
   final vectorTile = vectorMbtiles.getTile(z: 0, x: 0, y: 0);
   final vectorTileSize = vectorTile?.length ?? 0;
-  print('[VECTOR MBTILES] Uncompressed tile size: ${formatSize(vectorTileSize)}');
+  print(
+    '[VECTOR MBTILES] Uncompressed tile size: ${formatSize(vectorTileSize)}',
+  );
 
   // close mbtiles
   vectorMbtiles.dispose();
