@@ -1,8 +1,11 @@
+## [0.4.2] 2024-05-17
+
+- Make compatible with WASM
+
 ## [0.4.1] 2024-03-20
 
 - Update documentation
 - Update example
-
 
 ## [0.4.0] 2024-02-18
 

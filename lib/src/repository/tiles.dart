@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:mbtiles/src/helper/helpers_io.dart'
-    if (dart.library.js_util) 'package:mbtiles/src/helper/helpers_web.dart';
+    if (dart.library.js_interop) 'package:mbtiles/src/helper/helpers_web.dart';
 import 'package:sqlite3/common.dart';
 
 class TilesRepository {
