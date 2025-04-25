@@ -62,7 +62,7 @@ class MetadataRepository {
       json: map['json'],
       maxZoom: map['maxzoom'] == null ? null : double.parse(map['maxzoom']!),
       minZoom: map['minzoom'] == null ? null : double.parse(map['minzoom']!),
-      version: map['version'] == null ? null : double.parse(map['version']!),
+      version: map['version'] == null ? null : double.tryParse(map['version']!),
     );
   }
 
@@ -96,8 +96,7 @@ class MetadataRepository {
     if (metadata.bounds != null) {
       stmt.execute([
         'bounds',
-        '${metadata.bounds!.left},${metadata.bounds!.bottom},' +
-            '${metadata.bounds!.right},${metadata.bounds!.top}',
+        '${metadata.bounds!.left},${metadata.bounds!.bottom},' + '${metadata.bounds!.right},${metadata.bounds!.top}',
       ]);
     }
     if (metadata.type != null) {
